@@ -2,5 +2,6 @@
     "serverIP": "127.0.0.1",
     "serverPort": "3000",
     "mongodbIP": "127.0.0.1",
-    "mongodbPort": "27017"
+    "mongodbPort": "27017",
+    "corsAllow": true
 }

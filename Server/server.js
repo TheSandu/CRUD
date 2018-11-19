@@ -1,29 +1,28 @@
 const config = require("../config.json");
-const express = require("express");
+const express = require( "express" );
+const bodyParser = require( "body-parser" );
 
-const app = express();
 
-class Server {
-    constructor( serverSettings )
+const server = express();
+
+server.use( bodyParser.json() );
+server.use( bodyParser.urlencoded( { extended: true } ) );
+
+server.use( (req, res, next) => {
+
+    if( config.corsAllow )
     {
-        this.port = serverSettings.port || process.env.SERVER_PORT || config.serverPort || 3000;
-        this.host = serverSettings.host || process.env.SERVER_IP || config.serverIP || "127.0.0.1";
-        this.listen = app.listen;
+        res.header("Access-Control-Allow-Origin","*");
+        res.header("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept,Authorization");
+        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     }
 
-    start()
-    {
-        this.listen( this.port, this.host, ()=>{
-            console.log( "//--------------" , this.port, this.host );
-            console.log( config.serverIP );
-        });
-    }
-
-    routeStart()
-    {
-
-    }
-}
+    next();
+});
 
 
-module.exports = Server;
+server.listen( 3000,  () => {
+    DB = new DB(  );
+});
+
+module.exports = server;

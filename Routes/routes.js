@@ -1,14 +1,23 @@
-import express from "express"; 
+const Route = require( "../Server/Server" );
+const Users = require( "../Controllers/Users" );
 
-const app = express();
 
 // API
-app.get( "/api/users/all", Users.getAll);
+Route.get( "/api/all/users", Users.getAll);
 
-app.get( "/api/all/where/:collection", Users.getAllByQuery);
+Route.get( "/api/all/users/where", Users.getAllByQuery);
 
-app.post( "" )
+Route.post( "/api/insert", Users.insertOne );
+
+Route.post( "/api/update", Users.update );
+
+Route.post( "/api/delete", Users.delete );
+
 // VIEWS
-app.get( "/",  function( req, res ){ View.page("home").with( req, res ); });
+Route.get( "/",  View.page( "home" ) );
 
-app.listen( 3000, Env.onServerStart );
+Route.get( "/login",  View.page( "login" ) );
+
+Route.get( "/register", View.page( "register" ) );
+
+module.exports = Route;
