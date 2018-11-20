@@ -1,33 +1,20 @@
 const DB = require( "../Models/Users" );
 
-let DB = new DB();
+// let dBase = new DB();
 
-class Users
-{
-    getAll( req, res )
-    {
+exports.getAll = ( req, res ) => {
+    
 
-    }
-
-    getAllByQuery( req, res )
-    {
-
-    }
-
-    insertOne( req, res )
-    {
-
-    }
-
-    update( req, res )
-    {
-
-    }
-
-    delete( req, res )
-    {
-        
-    }
 }
+exports.getAllByQuery = ( req, res ) => {
 
-module.exports = DB;
+}
+exports.insertOne = ( req, res ) => {
+
+}
+exports.update = ( req, res ) => {
+
+}
+exports.delete = ( req, res ) => {
+    
+}

@@ -1,28 +1,13 @@
-const config = require("../config.json");
-const express = require( "express" );
+const server = require( "../Routes/Routes" );
 const bodyParser = require( "body-parser" );
+const Env = require( "../Controllers/Env" );
+const path = require('path');
 
-
-const server = express();
+server.set( "view engine", "ejs" );
+server.set('views', "D:\\CRUD\\Views\\pages" );
 
 server.use( bodyParser.json() );
 server.use( bodyParser.urlencoded( { extended: true } ) );
+server.use( Env.corsAllow );
 
-server.use( (req, res, next) => {
-
-    if( config.corsAllow )
-    {
-        res.header("Access-Control-Allow-Origin","*");
-        res.header("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept,Authorization");
-        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    }
-
-    next();
-});
-
-
-server.listen( 3000,  () => {
-    DB = new DB(  );
-});
-
-module.exports = server;
+server.listen( 3000, Env.onServerStart );

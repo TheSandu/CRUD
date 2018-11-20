@@ -19,14 +19,12 @@ class DB
         if( host == undefined )
         {
             this.host = "127.0.0.1";
-            console.log( "> Host address set to 127.0.0.1");
         } else
         this.host = host;
 
         if( port == undefined )
         {
             this.port = "27017";
-            console.log("> Port is set to 27017");
         } else
             this.port = port;
 
@@ -35,7 +33,7 @@ class DB
             if(err)
                 throw new Error( err );
             else
-
+                console.log( `DB is connected...HOST:${this.host}, PORT:${this.port}` );
 
             this.db = client.db( dbName );
         });
@@ -45,17 +43,15 @@ class DB
     {
         this.db.collection( collection ).insert( objToInsert, ( err, result ) => {
             if(err)
-                throw err;
+                console.log(err);
         });
     }
 
     getWhere( collection, whereObj )
     {
-        console.log( "/---------Query---------/" );
-        console.log( whereObj );
         this.db.collection( collection ).find( whereObj ).toArray( ( err, docs)=>{
             if(err)
-                throw err;
+                console.log(err);
         });
     }
 
@@ -63,14 +59,14 @@ class DB
     {
         this.db.collection( collection ).updateOne(myQuery, newValues, function(err, docs) {
             if(err)
-                throw err;
+                console.log(err);
         });
     }
     getAllCollection( collection )
     {
         this.db.collection( collection ).find().toArray( ( err, docs)=>{
             if(err)
-                throw err;
+                console.log(err);
         });
     }
 }

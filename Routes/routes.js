@@ -1,6 +1,8 @@
-const Route = require( "../Server/Server" );
+const express = require( "express" );
 const Users = require( "../Controllers/Users" );
+const Route = express();
 
+const Views = require( "../Controllers/View" );
 
 // API
 Route.get( "/api/all/users", Users.getAll);
@@ -14,10 +16,10 @@ Route.post( "/api/update", Users.update );
 Route.post( "/api/delete", Users.delete );
 
 // VIEWS
-Route.get( "/",  View.page( "home" ) );
+Route.get( "/",  Views.page( "home" ).show );
 
-Route.get( "/login",  View.page( "login" ) );
+Route.get( "/login",  Views.page( "login" ).show  );
 
-Route.get( "/register", View.page( "register" ) );
+Route.get( "/register", Views.page( "register" ).show );
 
 module.exports = Route;
