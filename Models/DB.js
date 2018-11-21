@@ -16,17 +16,9 @@ class DB
 {
     constructor( host, port, dbName )
     {
-        if( host == undefined )
-        {
-            this.host = "127.0.0.1";
-        } else
-        this.host = host;
 
-        if( port == undefined )
-        {
-            this.port = "27017";
-        } else
-            this.port = port;
+        this.host = host || "127.0.0.1";
+        this.port = port || "27017";
 
         MongoClient.connect( `mongodb://${this.host}:${this.port}`, ( err, client) =>
         {
@@ -39,35 +31,23 @@ class DB
         });
     }
 
-    insert( collection, objToInsert )
+    insert( collection, objToInsert, callback )
     {
-        this.db.collection( collection ).insert( objToInsert, ( err, result ) => {
-            if(err)
-                console.log(err);
-        });
+        this.db.collection( collection ).insert( objToInsert, callback );
     }
 
-    getWhere( collection, whereObj )
+    getWhere( collection, whereObj, callback )
     {
-        this.db.collection( collection ).find( whereObj ).toArray( ( err, docs)=>{
-            if(err)
-                console.log(err);
-        });
+        this.db.collection( collection ).find( whereObj ).toArray( callback );
     }
 
-    updateOne( collection, myQuery, newValues )
+    update( collection, myQuery, newValues, callback )
     {
-        this.db.collection( collection ).updateOne(myQuery, newValues, function(err, docs) {
-            if(err)
-                console.log(err);
-        });
+        this.db.collection( collection ).updateOne(myQuery, newValues, callback);
     }
-    getAllCollection( collection )
+    getAllCollection( collection, callback )
     {
-        this.db.collection( collection ).find().toArray( ( err, docs)=>{
-            if(err)
-                console.log(err);
-        });
+        this.db.collection( collection ).find().toArray( callback );
     }
 }
 

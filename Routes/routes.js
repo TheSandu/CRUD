@@ -16,10 +16,13 @@ Route.post( "/api/update", Users.update );
 Route.post( "/api/delete", Users.delete );
 
 // VIEWS
-Route.get( "/",  Views.page( "home" ).show );
+Route.get( "/",  Views.homePage );
 
-Route.get( "/login",  Views.page( "login" ).show  );
+Route.get( "/login",  Views.loginPage );
 
-Route.get( "/register", Views.page( "register" ).show );
+Route.get( "/register", Views.registerPage );
+
+Route.get( "/users", Views.usersPage );
+
 
 module.exports = Route;
