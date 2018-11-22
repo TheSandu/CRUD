@@ -1,0 +1,24 @@
+<% include ../partials/header.ejs %>
+<% include ../partials/navBar.ejs %>
+  <div class="container">
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <h3 class="border-bottom border-gray pb-2 mb-0">Users</h3>
+            <% users.forEach( ( user ) =>{  %>
+            <div class="media text-muted pt-3">
+                <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <div class="d-flex justify-content-between align-items-center w-100">
+                  <strong class="text-gray-dark"><%- user.fullName %></strong>
+                  <ul style="list-style-type: none;">
+                      <li><a href=<%= '/user/' + user._id %>  >See</a></li>
+                      <li><a href=<%= '/updateUser/' + user._id %>  >Update</a></li>
+                      <li><a href=<%= '/deleteUser/' + user._id %>  >Delete</a></li>
+                  </ul>
+                </div>
+                <span class="d-block"><%- user.aboute %></span>
+              </div>
+            </div>
+          <% }); %>
+          </div>
+
+  </div>
+<% include ../partials/footer.ejs %>

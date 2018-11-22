@@ -3,5 +3,6 @@
     "serverPort": "3000",
     "mongodbIP": "127.0.0.1",
     "mongodbPort": "27017",
+    "dbase": "crud",
     "corsAllow": true
 }

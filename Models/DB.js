@@ -9,6 +9,9 @@
  * });
  */
 
+const config = require("../config.json");
+
+const ObjectId  = require( "mongodb" ).ObjectID;
 
 const MongoClient = require( "mongodb" ).MongoClient; 
 
@@ -17,8 +20,8 @@ class DB
     constructor( host, port, dbName )
     {
 
-        this.host = host || "127.0.0.1";
-        this.port = port || "27017";
+        this.host = config.mongodbIP || host || "127.0.0.1";
+        this.port = config.mongodbPort || port || "27017";
 
         MongoClient.connect( `mongodb://${this.host}:${this.port}`, ( err, client) =>
         {
@@ -27,7 +30,8 @@ class DB
             else
                 console.log( `DB is connected...HOST:${this.host}, PORT:${this.port}` );
 
-            this.db = client.db( dbName );
+            this.objId = ObjectId;
+            this.db = client.db( config.dbase || dbName );
         });
     }
 
@@ -49,6 +53,11 @@ class DB
     {
         this.db.collection( collection ).find().toArray( callback );
     }
+
+    deleteOneWhere( collection, myQuery, callback )
+    {
+        this.db.collection( collection ).deleteOne( myQuery, callback );
+    }
 }
 
-module.exports = DB;
+module.exports = new DB();
