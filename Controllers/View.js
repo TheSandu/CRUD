@@ -1,19 +1,19 @@
 const DB = require("../Models/DB");
 
 exports.homePage = ( req, res ) => {
-    res.render( "home.view.ejs", { name: "Bacinschii Alexandru" } );    
+    res.render( "home.view.ejs" );    
 }
 
 exports.loginPage = ( req, res ) => {
-    res.render( "login.view.ejs", { name: "Bacinschii Alexandru" } );
+    res.render( "login.view.ejs" );
 }
 
 exports.registerPage = ( req, res ) => {
-    res.render( "register.view.ejs", { name: "Bacinschii Alexandru" } );
+    res.render( "register.view.ejs" );
 }
 
 exports.thisUserPage = ( req, res ) => {
-    res.render( "thisUser.view.ejs", { name: "Bacinschii Alexandru" } );    
+    res.render( "thisUser.view.ejs" );    
 }
 
 exports.usersPage = ( req, res ) => {
@@ -25,10 +25,13 @@ exports.usersPage = ( req, res ) => {
 
 exports.userPage = ( req, res ) => {
     DB.getWhere("users", { _id: new DB.objId(req.params.id) }, ( err, docs )  => {
-        console.log( docs  );
         if( err ){ console.log(err); return res.sendStatus(500); }
         res.render( "user.view.ejs", { user: docs[0] } );
     });
+}
+
+exports.findPage  = ( req, res ) => {
+    res.render( "find.view.ejs" );
 }
 
 exports.insertUserPage  = ( req, res ) => {
@@ -36,23 +39,5 @@ exports.insertUserPage  = ( req, res ) => {
 }
 
 exports.updateUserPage  = ( req, res ) => {
-
-    var myQuery = { _id: new DB.objId( req.params.id ) };
-    var newValues = { $set: req.body  };
-
-    DB.update( "users", myQuery, newValues, ( err )  => {
-        if( err ){ console.log(err); return res.sendStatus(500); }
-        else
-            res.render( "home.view.ejs" );
-    });
-    res.render( "updateUser.view.ejs", { name: "Bacinschii Alexandru" } );
-}
-
-exports.deleteUserPage  = ( req, res ) => {
-
-    DB.deleteOneWhere("users", { _id: new DB.objId(req.params.id) }, ( err )  => {
-        if( err ){ console.log(err); return res.sendStatus(500); }
-        else
-            res.render( "deleteUser.view.ejs" );
-    });
+    res.render( "updateUser.view.ejs", { user: req.params} );
 }

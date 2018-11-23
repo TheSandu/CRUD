@@ -1,8 +1,26 @@
+/**
+ * Route module is instance of express module
+ * 
+ * Usage
+ * 
+ * Route.{method}( route[string], callback[function] );
+ * 
+ * methods: get, post, put, delete
+ * 
+ * Ins this module write onli routes
+ * but can make over express utilities
+ */
+
+
 const express = require( "express" );
 const Users = require( "../Controllers/Users" );
 const Views = require( "../Controllers/View" );
+const bodyParser = require( "body-parser" );
 
 const Route = express();
+
+Route.use( bodyParser.json() );
+Route.use( bodyParser.urlencoded( { extended: true } ) );
 
 // API
 Route.get( "/api/all/users", Users.getAll);
@@ -16,22 +34,28 @@ Route.post( "/api/update", Users.update );
 Route.post( "/api/delete", Users.delete );
 
 // VIEWS
-Route.post( "/",  Views.homePage );
+Route.get( "/",  Views.homePage );
 
 Route.get( "/login",  Views.loginPage );
 
 Route.get( "/register", Views.registerPage );
 
-Route.get( "/thisUser", Views.thisUserPage );
-
 Route.get( "/user/:id", Views.userPage );
 
 Route.get( "/users", Views.usersPage );
 
+Route.get( "/find", Views.findPage );
+
+Route.post( "/find", Users.find );
+
 Route.get( "/insertUser", Views.insertUserPage );
+
+Route.post( "/insert/", Users.insert );
 
 Route.get( "/updateUser/:id", Views.updateUserPage );
 
-Route.get( "/deleteUser/:id", Views.deleteUserPage );
+Route.post( "/update/:id", Users.update );
+
+Route.post( "/delete/:id", Users.delete );
 
 module.exports = Route;

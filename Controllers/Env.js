@@ -1,3 +1,11 @@
+/**
+ * 
+ * This controller have server side functions
+ * such as headers, on server start event, etc.
+ * 
+ */
+
+
 const config = require("../config.json");
 
 exports.corsAllow = (req, res, next) => {
