@@ -23,3 +23,11 @@ views folder is set in Server.js
   |--footer
   |--header
   |--navBar
+
+
+Exported DB:
+../CRUD/users.json
+
+Login info:
+Login:    tom62
+Password: admin321
