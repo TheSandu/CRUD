@@ -42,6 +42,8 @@
 
 const config = require("../config.json");
 
+const md5 = require("md5");
+
 const ObjectId  = require( "mongodb" ).ObjectID;
 
 const MongoClient = require( "mongodb" ).MongoClient; 
@@ -62,9 +64,12 @@ class DB
                 console.log( `DB is connected...HOST:${this.host}, PORT:${this.port}` );
 
             this.objId = ObjectId;
+            this.md5 = md5;
             this.db = client.db( config.dbase || dbName || "crud");
         });
     }
+
+    
 
     insert( collection, objToInsert, callback )
     {

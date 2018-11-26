@@ -16,11 +16,13 @@ const express = require( "express" );
 const Users = require( "../Controllers/Users" );
 const Views = require( "../Controllers/View" );
 const bodyParser = require( "body-parser" );
+const session = require("express-session");
 
 const Route = express();
 
 Route.use( bodyParser.json() );
 Route.use( bodyParser.urlencoded( { extended: true } ) );
+Route.use( session({ secret: "sandu9111", resave: false, saveUninitialized: true }) );
 
 // API
 Route.get( "/api/all/users", Users.getAll);
@@ -34,17 +36,18 @@ Route.post( "/api/update", Users.update );
 Route.post( "/api/delete", Users.delete );
 
 // VIEWS
-Route.get( "/",  Views.homePage );
+
+Route.get( "/thisUser", Views.thisUserPage );
 
 Route.get( "/login",  Views.loginPage );
-
-Route.get( "/register", Views.registerPage );
 
 Route.get( "/user/:id", Views.userPage );
 
 Route.get( "/users", Views.usersPage );
 
 Route.get( "/find", Views.findPage );
+
+Route.post( "/",  Views.homePage );
 
 Route.post( "/find", Users.find );
 

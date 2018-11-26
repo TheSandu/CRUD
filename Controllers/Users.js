@@ -22,7 +22,7 @@ exports.getAllByQuery = ( req, res ) => {
 exports.insert = ( req, res ) => {
     let cryptedPassObj = {
         userName: req.body.userName ,
-        password: md5( req.body.password ) ,
+        password: DB.md5( req.body.password ) ,
         fullName: req.body.fullName ,
         aboute: req.body.aboute
     };
